@@ -53,6 +53,26 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    int width[1000][1000];
+
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        /*
+        官方题解三：使用柱状图 - 栈
+        在上一方法中我们讨论了将输入拆分成一系列的柱状图，每个柱状图代表一列的子结构。为了计算长方形的最大面积，我们仅仅需要计算每个柱状图中的最大面积并找到全局最大值（注意后面的解法对每一行而非列建立了柱状图，两者思想一致）。
+
+        既然我们已经有了 84 - 柱状图中最大的矩形，可以直接使用该题题解中最快的基于栈的解法 点击这里 ，并将其应用在我们生成的柱状图中。想详细了解该算法的原理，请点击上面的链接。
+
+        作者：LeetCode
+        链接：https://leetcode-cn.com/problems/two-sum/solution/zui-da-ju-xing-by-leetcode/
+        来源：力扣（LeetCode）
+        著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+        */
+        //矩阵长度
+        return 0;
+    }
+};
 
 int main(){
     Solution sol = Solution();
