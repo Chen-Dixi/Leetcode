@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stack>
 #include <cstring>
 #include <vector>
 #include <map>
@@ -8,7 +9,6 @@
 #include <algorithm>
 #include <climits>
 using namespace std;
-
 
 /**
  * Definition for a binary tree node.
@@ -50,3 +50,63 @@ public:
             return false;
     }
 };
+
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        // 最近公共祖先，that is to say, 1. 节点p 和 q分别在这个祖先节点的两边。 2. 祖先节点是p,q其中之一
+        
+        stack<pair<TreeNode*, int> > s;
+        // 0 both pending; 1 left done; 2 both done
+
+        pair<TreeNode*,int> tmp = make_pair(root, 2);
+        TreeNode *LCA = NULL;
+        TreeNode *child_node=NULL;
+        s.push(tmp);
+        bool one_node_found = false;
+        while(!s.empty()){
+            pair<TreeNode*,int> top = s.top();
+            TreeNode * parent_node = top.first;
+            int parent_state = top.second;
+            // If the parent_state is not equal to BOTH_DONE,
+            // this means the parent_node can't be popped off yet.
+            if(parent_state!=0){
+                if (parent_state == 2){
+                    if (parent_node == p || parent_node == q){
+                        if(one_node_found)//如果已经发现过一个
+                            return LCA;
+                        else{
+                            one_node_found=true;
+                            LCA = s.top().first;
+
+                        }
+                    }
+                    child_node = parent_node->left;
+                }else{
+                    child_node = parent_node->right;
+                }
+                s.pop();
+                s.push(make_pair(parent_node,parent_state-1));   
+                // Add the child node to the stack for traversal.
+                if (child_node != NULL) {
+                    s.push(make_pair(child_node, 2));
+                }
+
+            }else{
+                TreeNode* tmp = s.top().first;
+                s.pop();
+                if (LCA==tmp && one_node_found){
+                    LCA=s.top().first;
+
+                }
+            }
+        }
+        return NULL;  
+    }
+    
+};
+
+
+
+
+
