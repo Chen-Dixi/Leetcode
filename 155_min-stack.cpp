@@ -25,9 +25,7 @@ public:
 
             //s2存储栈1当前最小元素
             s2.push(top>x?x:top);
-        }
-            
-
+        }   
     }
     
     void pop() {
