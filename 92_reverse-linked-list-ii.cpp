@@ -46,3 +46,48 @@ public:
 private:
     ListNode* successor;
 };
+
+class Solution2 {
+public:
+    ListNode* reverseBetween(ListNode* head, int m, int n){
+        
+        if (head==NULL){
+            return NULL;
+        }
+
+        ListNode *con = head;
+        ListNode *tail = NULL;
+        ListNode *prev = NULL;
+        ListNode *cur = head;
+        ListNode *third = NULL;
+
+        while(--m){
+            prev = cur;
+            cur = cur->next;
+            n--;
+        }
+
+        tail = cur;//确定尾部
+        con = prev;//确定头部
+
+        while(n--){
+            third = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur=third;
+        }
+        if(con!=NULL){
+            con->next = prev;
+        }else{
+            head = prev;
+        }
+        tail->next = cur;
+        
+        return head;
+    }
+
+};
+
+
+
+
