@@ -27,7 +27,6 @@ public:
             maxprofit += peak - valley;
         }
         return maxprofit;
-
     }
 };
 
@@ -35,9 +34,6 @@ class Solution2 {
 public:
     int maxProfit(vector<int>& prices) {
         //状态转移
-        
-        
-
         int totaldays = prices.size();
         if (totaldays < 2) {
             return 0;
