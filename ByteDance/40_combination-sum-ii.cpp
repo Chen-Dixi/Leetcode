@@ -10,59 +10,68 @@ using namespace std;
 
 
 class Solution {
+
+private:
+    vector<int> candidates;
+    vector<vector<int>> res;
+    vector<int> path;
 public:
-
-    vector<int> input;
-    int target;
-    vector<vector<int>> result;
-    vector<int> vc;
-
-    void dfs(int index, int sum) {
-        // index >= input.size() ，写成 index == input.size() 即可
-        // 因为每次都 + 1，在 index == input.size() 剪枝就可以了
-        if (sum >= target || index == input.size()) {
-            if (sum == target) {
-                result.push_back(vc);
-            }
+    void DFS(int start, int target) {
+        if (target == 0) {
+            res.push_back(path);
             return;
         }
-        for (int i = index; i < input.size(); i++) {
-            if (input[i] > target) {
-                continue;
-            }
 
-            // 【我添加的代码在这里】：
-            // 1、i > index 表明剪枝的分支一定不是当前层的第 1 个分支
-            // 2、input[i - 1] == input[i] 表明当前选出来的数等于当前层前一个分支选出来的数
-            // 因为前一个分支的候选集合一定大于后一个分支的候选集合
-            // 故后面出现的分支中一定包含了前面分支出现的结果，因此剪枝
-            // “剪枝”的前提是排序，升序或者降序均可
-            if (i > index && input[i - 1] == input[i]) {
+        for (int i = start; i < candidates.size() && target - candidates[i] >= 0; i++) {
+            if (i > start && candidates[i] == candidates[i - 1])
                 continue;
-            }
-
-            vc.push_back(input[i]);
-            sum += input[i];
-            dfs(i + 1, sum);
-            vc.pop_back();
-            sum -= input[i];
+            path.push_back(candidates[i]);
+            // 元素不可重复利用，使用下一个即i+1
+            DFS(i + 1, target - candidates[i]);
+            path.pop_back();
         }
     }
 
     vector<vector<int>> combinationSum2(vector<int> &candidates, int target) {
-        // “剪枝”的前提是排序，升序或者降序均可
+        //吸纳拍好
         sort(candidates.begin(), candidates.end());
-        this->input = candidates;
-        this->target = target;
-        dfs(0, 0);
-        return result;
+        this->candidates = candidates;
+        DFS(0, target);
+        return res;
     }
 };
 
-作者：liweiwei1419
-链接：https://leetcode-cn.com/problems/combination-sum-ii/solution/hui-su-suan-fa-jian-zhi-python-dai-ma-java-dai-m-3/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+class Solution{
+public :
+    vector<vector<int> > res;
+    int target;
+
+    vector<vector<int>> combinationSum2(vector<int> &candidates, int target) {
+        //吸纳拍好
+        sort(candidates.begin(), candidates.end());
+        vector<int> path;
+        this->target = target;
+        dfs(0, 0, candidates, path);
+        
+        return this->res;
+    }
+
+    void dfs(int index, int sum, vector<int> &candidates, vector<int> & path){
+        
+        if(sum == this->target){
+            this->res.push_back(path);
+        }
+
+        for(int i=index;i<candidates.size() && sum+candidates[i]<=this->target;i++){
+            if(i>index && candidates[i]==candidates[i-1]) //同一层内搜索就不行
+                continue;
+            path.push_back(candidates[i]);
+            dfs(i+1, sum+candidates[i],candidates,path); //注意第一个参数，我们先排好序，就是为了防止搜索到重复的答案，所以第一个参数别写成index+1，应该写成i+1
+            path.pop_back();
+        }
+
+    }
+};
 
 int main(){
     Solution sol = Solution();
