@@ -46,7 +46,7 @@ public:
         for(int k=0;k<4;k++){
             int ii = i+dm[k];
             int jj = j+dn[k];
-            if(ii>=0 && ii<m && jj>=0 && jj<n && grid[ii][jj]=='1'){ //可以直接用这个grid当作flag
+            if(ii>=0 && ii<m && jj>=0 && jj<n && grid[ii][jj]=='1'){ //可以直接用这个grid当作flag 
                 bianli(ii,jj,grid,m,n);
             }
         }
