@@ -51,43 +51,65 @@ class Solution2 {
 public:
     ListNode* reverseBetween(ListNode* head, int m, int n){
         
-        if (head==NULL){
+        if(head==NULL)
             return NULL;
-        }
 
-        ListNode *con = head;
-        ListNode *tail = NULL;
-        ListNode *prev = NULL;
-        ListNode *cur = head;
-        ListNode *third = NULL;
+        ListNode* cur=head;
+        ListNode* prev=NULL;
+        ListNode* tail=NULL;
+        ListNode* third=NULL;
+        ListNode* con=NULL;
 
         while(--m){
-            prev = cur;
-            cur = cur->next;
+            prev=cur;
+            cur=cur->next;
             n--;
         }
 
-        tail = cur;//确定尾部
-        con = prev;//确定头部
+        con = prev; //反转这一段链表，反转后头部跟在con后面，如果从第一个节点开始反转，con==NULL
+        tail = cur; //此时，tail是要反转这一段的头部，反转过后会变成尾部，所以是tail
 
         while(n--){
             third = cur->next;
             cur->next = prev;
             prev = cur;
-            cur=third;
+            cur = third;
         }
-        if(con!=NULL){
-            con->next = prev;
-        }else{
+
+        if(con==NULL){
             head = prev;
+        }else{
+            con->next = prev;
         }
+
         tail->next = cur;
-        
+
         return head;
+
     }
 
 };
 
+//简单的反转链表
+class Solution4Simple {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (head==NULL){
+            return NULL;
+        }
 
+        ListNode* cur = head;
+        ListNode* prev = NULL;
+        ListNode* third = NULL;
+
+        while(cur!=NULL){
+            third = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = third;
+        }
+        return prev;
+    }
+};
 
 

@@ -28,6 +28,12 @@ public:
         int right = maxDepth(root->right);
         return max(left,right);
     }
-
 };
 
+int main(){
+    Solution sol = Solution();
+    int n=10;
+    int ans = sol.climbStairs(n);
+    printf("%d\n",ans );
+    return 0;
+}

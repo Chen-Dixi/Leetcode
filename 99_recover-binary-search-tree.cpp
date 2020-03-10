@@ -55,7 +55,7 @@ private:
         if(root==NULL)
             return;
         inorderTraversal(root->left);
-        if (pre!=NULL && root->val < pre->val){
+        if (pre!=NULL && root->val < pre->val){ //只是被交换，就可以这样找
             if(t1==NULL) t1=pre;
             t2=root;
         }
