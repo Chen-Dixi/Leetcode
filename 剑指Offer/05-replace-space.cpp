@@ -34,6 +34,7 @@ public:
         }
 
         int newLength = originalLength+2*numberOfBlank;
+
         if(newLength>length)
             return;
 
@@ -41,14 +42,15 @@ public:
         int indexOfNew = newLength;
 
         while(indexOfOriginal >= 0 && indexOfNew > indexOfOriginal){
-            if(str[indexOfOriginal--]==' '){
+            if(str[indexOfOriginal]==' '){
                 str[indexOfNew--]='0';
                 str[indexOfNew--]='2';
                 str[indexOfNew--]='%';
             
             }else{
-                str[indexOfNew--]=str[indexOfOriginal--];
+                str[indexOfNew--]=str[indexOfOriginal];
             }
+            indexOfOriginal--;
         }
     }
 };

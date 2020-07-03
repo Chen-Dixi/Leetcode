@@ -15,7 +15,6 @@ public:
         if (intervals.empty())
             return {};
         
-
         sort(intervals.begin(), intervals.end());
         vector<vector<int> > ans;
 

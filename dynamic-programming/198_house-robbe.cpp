@@ -45,3 +45,26 @@ int main(){
     printf("%d\n",ans );
     return 0;
 }
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int ans=0;
+        int len=nums.size();
+        if(len==0)
+            return ans;
+        int *dp = new int[len+1];
+
+        
+        dp[0]=nums[0];
+        if(len>1)
+            dp[1]=max(nums[0],nums[1]);
+        
+        for(int i=2;i<len;i++){
+            dp[i] = max(dp[i-2]+nums[i], dp[i-1]);
+        }
+        ans = dp[len-1];
+        delete [] dp;
+        return ans;
+    }
+};

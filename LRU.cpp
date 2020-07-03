@@ -34,10 +34,16 @@ public:
 
             }
         }
-        
     }
 private:
     unordered_map<int, list<pair<int, int>>::iterator> mp;
     list<pair<int,int>> lt;
     int size;
 };
+
+//双向链表，+hash
+
+class LRUCache{
+
+
+}

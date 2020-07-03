@@ -41,7 +41,6 @@ private:
                 return kuai;
         }
 
-
         return NULL;
     }
 };

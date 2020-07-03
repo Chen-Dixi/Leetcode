@@ -33,7 +33,7 @@ public:
             if(j==0){
                 res=val;
             }
-            i++
+            i++;
             next = next->next;
         }
         return res;

@@ -32,10 +32,7 @@ public:
                 p+=count;
             }
         }
-
         return prefix;
-
-
     }
 private:
 

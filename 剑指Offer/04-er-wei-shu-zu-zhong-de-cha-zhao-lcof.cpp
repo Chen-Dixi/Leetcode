@@ -46,6 +46,27 @@ public:
 
 考察问题分析能力，发现问题比较复杂时，能不能通过具体例子找出其他规律。能否解决这个问题的关键所在。
 从右上角开始分析，就能找到方法
-
 */
-
+class Solution {
+public:
+    bool findNumberIn2DArray(vector<vector<int> >& matrix, int target) {
+        int nrow = matrix.size();
+        if(nrow==0)
+            return false;
+        int ncol = matrix[0].size();
+        if(ncol==0)
+            return false;
+        //从右上角开始，row=0，col=ncol-1
+        int row = 0, col=ncol-1;
+        while(row<nrow && col>=0){
+            if(matrix[row][col]>target){
+                col=col-1;
+            }else if(matrix[row][col]<target){
+                row = row+1;
+            }else{
+                return true;
+            }
+        }
+        return false;
+    }
+};
